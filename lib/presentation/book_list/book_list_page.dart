@@ -11,50 +11,42 @@ class BookListPage extends StatelessWidget {
       create: (_) => BookListModel()..fetchBooks(),
       child: Scaffold(
         appBar: AppBar(
-          title: Text('本一覧'),
+          title: Text('番組一覧'),
         ),
         body: Consumer<BookListModel>(
           builder: (context, model, child) {
             final books = model.books;
             final listTiles = books
-                .map((book) => ListTile(
-                      leading: Image.network(book.imageURL),
-                      title: Text(book.title),
+                .map((book) => Card(
+                        child: ListTile(
+                      leading: Image.network(
+                          'https://www.allnightnippon.com/wp/assets/uploads/2019/11/main_sanshiro02.jpg'),
+                      title: Text('番組名'),
+                      subtitle: Text('番組紹介文が入ります番組紹介文が入ります'),
+                      isThreeLine: true,
                       trailing: IconButton(
-                        icon: Icon(Icons.edit),
+                        icon: Icon(Icons.star_outline),
                         onPressed: () async {
-                          await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => AddBookPage(
-                                  book: book,
-                                ),
-                                fullscreenDialog: true,
-                              ));
-                          model.fetchBooks();
+                          // todo お気に入りに追加
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('番組をお気に入りに追加しました'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('OK'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  )
+                                ],
+                              );
+                            },
+                          );
                         },
                       ),
-                      onLongPress: () async {
-                        // todo 削除
-                        await showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: Text('${book.title}削除しますか？'),
-                              actions: <Widget>[
-                                FlatButton(
-                                  child: Text('OK'),
-                                  onPressed: () async {
-                                    Navigator.of(context).pop();
-                                    await deleteBook(context, model, book);
-                                  },
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                    ))
+                    )))
                 .toList();
             return ListView(
               children: listTiles,
