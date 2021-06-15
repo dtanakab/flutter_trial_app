@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:youtube_app/presentation/book_list/book_list_page.dart';
 import 'package:youtube_app/presentation/main/main_model.dart';
+import 'package:youtube_app/presentation/program_list/program_list_page.dart';
 import 'package:youtube_app/signup/signup_page.dart';
 
 void main() {
@@ -40,12 +40,12 @@ class App extends StatelessWidget {
                         },
                       ),
                       RaisedButton(
-                        child: Text('本一覧'),
+                        child: Text('番組一覧'),
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => BookListPage()),
+                                builder: (context) => ProgramListPage()),
                           );
                         },
                       )

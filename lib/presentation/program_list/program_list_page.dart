@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_app/domain/book.dart';
 import 'package:youtube_app/presentation/add_book/add_book_page.dart';
-import 'package:youtube_app/presentation/book_list/book_list_model.dart';
+import 'package:youtube_app/presentation/program_list/program_list_model.dart';
 
-class BookListPage extends StatelessWidget {
+class ProgramListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<BookListModel>(
-      create: (_) => BookListModel()..fetchBooks(),
+    return ChangeNotifierProvider<ProgramListModel>(
+      create: (_) => ProgramListModel()..fetchBooks(),
       child: Scaffold(
         appBar: AppBar(
           title: Text('番組一覧'),
         ),
-        body: Consumer<BookListModel>(
+        body: Consumer<ProgramListModel>(
           builder: (context, model, child) {
             final books = model.books;
             final listTiles = books
@@ -54,7 +54,7 @@ class BookListPage extends StatelessWidget {
           },
         ),
         floatingActionButton:
-            Consumer<BookListModel>(builder: (context, model, child) {
+            Consumer<ProgramListModel>(builder: (context, model, child) {
           return FloatingActionButton(
             child: Icon(Icons.add),
             onPressed: () async {
@@ -73,7 +73,7 @@ class BookListPage extends StatelessWidget {
   }
 
   Future deleteBook(
-      BuildContext context, BookListModel model, Book book) async {
+      BuildContext context, ProgramListModel model, Book book) async {
     try {
       await model.deleteBook(book);
       await model.fetchBooks();
