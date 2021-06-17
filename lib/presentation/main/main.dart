@@ -17,7 +17,11 @@ class App extends StatelessWidget {
           create: (_) => MainModel(),
           child: Scaffold(
             appBar: AppBar(
-              title: Text('デモ'),
+              title: Text(
+                'Radipos',
+                style: TextStyle(color: Colors.black54),
+              ),
+              backgroundColor: Colors.amberAccent,
             ),
             body: Consumer<MainModel>(builder: (context, model, child) {
               return Center(
@@ -55,24 +59,21 @@ class App extends StatelessWidget {
             bottomNavigationBar: BottomNavigationBar(
               items: const <BottomNavigationBarItem>[
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.home),
-                    label: 'ホーム',
-                    backgroundColor: Colors.orange),
+                  icon: Icon(Icons.home),
+                  label: 'ホーム',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.list),
-                    label: 'リスト',
-                    backgroundColor: Colors.orange),
+                  icon: Icon(Icons.search),
+                  label: 'さがす',
+                ),
                 BottomNavigationBarItem(
-                    icon: Icon(Icons.search),
-                    label: 'さがす',
-                    backgroundColor: Colors.orange),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.settings),
-                    label: 'マイページ',
-                    backgroundColor: Colors.orange),
+                  icon: Icon(Icons.assignment_ind_outlined),
+                  label: 'マイページ',
+                ),
               ],
-              currentIndex: 2,
-              selectedItemColor: Colors.white,
+              currentIndex: 0,
+              fixedColor: Colors.white,
+              backgroundColor: Colors.amberAccent,
             ),
           ),
         ));
