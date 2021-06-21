@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:youtube_app/domain/book.dart';
-import 'package:youtube_app/presentation/add_book/add_book_page.dart';
+import 'package:youtube_app/presentation/main/footer.dart';
+import 'package:youtube_app/presentation/main/header.dart';
 import 'package:youtube_app/presentation/program_list/program_list_model.dart';
 
 class ProgramListPage extends StatelessWidget {
@@ -10,9 +11,7 @@ class ProgramListPage extends StatelessWidget {
     return ChangeNotifierProvider<ProgramListModel>(
       create: (_) => ProgramListModel()..fetchBooks(),
       child: Scaffold(
-        appBar: AppBar(
-          title: Text('番組一覧'),
-        ),
+        appBar: Header(),
         body: Consumer<ProgramListModel>(
           builder: (context, model, child) {
             final books = model.books;
@@ -53,21 +52,7 @@ class ProgramListPage extends StatelessWidget {
             );
           },
         ),
-        floatingActionButton:
-            Consumer<ProgramListModel>(builder: (context, model, child) {
-          return FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () async {
-              await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => AddBookPage(),
-                    fullscreenDialog: true,
-                  ));
-              model.fetchBooks();
-            },
-          );
-        }),
+        bottomNavigationBar: Footer(),
       ),
     );
   }
